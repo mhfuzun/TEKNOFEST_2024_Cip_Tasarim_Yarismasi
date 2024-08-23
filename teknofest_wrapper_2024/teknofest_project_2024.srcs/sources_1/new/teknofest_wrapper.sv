@@ -81,7 +81,6 @@ module teknofest_wrapper #(
     /////////////////////////////////////////////////////////
     // Core'u burada cagirin. core_mem struct'?n? ba?lay?n.
     // core_clk ve core_rst_n sinyallerini baglamayi unutmayin.
-    //      UART      //
     assign core_mem.req = 1'b0;             // -> okuma yazma isteği (core_mem.gnt = 1) olana kadar HIGH tutulur
     // core_mem.gnt                         // -> öncelikli olarak yazma, yoksa okuma isteğinin alındığı HIGH ile gösterilir
     assign core_mem.we = 1'b0;              // -> Yazma için açık tutulur (yazma yalnız (core_mem.req & core_mem.we & core_mem.gnt) anında gerçekleşir)
