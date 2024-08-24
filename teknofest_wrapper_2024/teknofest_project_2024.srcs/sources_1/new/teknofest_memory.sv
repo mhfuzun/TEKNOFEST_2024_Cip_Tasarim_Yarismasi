@@ -13,6 +13,9 @@
 // Düzenlemeler: 
 //  * (23/08/2024) - x
 //      - tb içinde FAST_BOOT seçeneği için sram/memory yeri değiştirildi
+//      - <app_addr> pini doğru olacak şekilde ayarlandı. (başka projelerde kullanıldığı şekilde)
+//          wire [26:0] app_addr     = addr[27:1];
+//          wire [26:0] app_addr     = addr[30:4];
 //*************************************************************************************************************************************************//
 // Copyright 2024 TUTEL (IC Design and Training Laboratory - TUBITAK).
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -28,7 +31,7 @@ module teknofest_memory #(
     input  logic        req,
     output logic        gnt,
     input  logic        we,
-    input  logic[31:0]  addr,
+    input  logic[31:0]  addr, // 128bit hizalı olmalı ?
     input  logic[127:0] wdata,
     input  logic[15:0]  wstrb,
     output logic[127:0] rdata,
@@ -58,7 +61,7 @@ module teknofest_memory #(
     output        ddr2_odt
 );
     wire        sys_clk_i    = sys_clk;
-    wire [26:0] app_addr     = addr[30:4];
+    wire [26:0] app_addr     = addr[27:1]; // addr[0] iki aşamalı işlem gerektirir.
     wire [2:0]  app_cmd      = ~we ? (3'b001) : (wstrb != 16'hFFFF ? 3'b001 : 3'b000);
     wire        app_en       = req;
     wire [127:0]app_wdf_data = wdata;

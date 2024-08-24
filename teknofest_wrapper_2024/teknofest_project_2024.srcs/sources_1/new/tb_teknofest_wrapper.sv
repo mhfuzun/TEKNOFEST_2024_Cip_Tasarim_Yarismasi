@@ -26,7 +26,7 @@
 
 module tb_teknofest_wrapper #(
     parameter int unsigned USE_SRAM = 0,
-    parameter int unsigned FAST_BOOT = 0,
+    parameter int unsigned FAST_BOOT = (0 & USE_SRAM),
     parameter int unsigned SRAM_MEM_SIZE_KB = 128,
     parameter UART_BAUD_RATE = 750000,
     parameter DDR_FREQ_HZ = 300_000_000

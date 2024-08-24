@@ -32,9 +32,16 @@ module teknofest_wrapper #(
 )(
     // Related to DDR MIG
     input logic sys_rst_n,
-    input logic sys_clk, // TODO: SRAM kullanırken bunu cpu clock olarak kullan, yoksa DDR ui_clk
-                        // DDR2 için 200Mhz (5ns period) clock bağlanır
-    
+
+    ///////////////////////////////////////////////////////////////////////
+    // SRAM:
+    // Doğrudan çekrideğe bağlanır, bu pine bağlanan clock modülünce perioda sahip olur.
+    // DDR:
+    // DDR2 için 200Mhz (5ns period) clock bağlanır
+    // Çekirdek ve Programlayıcı DDR'da bulunan PPL'den çıkan clock sinyalini kullanır (4:1 oranı ile 75Mhz (13.33ns period))
+    input logic sys_clk, 
+    ///////////////////////////////////////////////////////////////////////
+
     inout  [15:0] ddr2_dq,
     inout  [1:0]  ddr2_dqs_n,
     inout  [1:0]  ddr2_dqs_p,
