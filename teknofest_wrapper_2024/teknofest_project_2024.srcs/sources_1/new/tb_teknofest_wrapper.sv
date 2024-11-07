@@ -192,7 +192,8 @@ task send_prog_seq();
       send_prog_seq();
       send_program();
       $display("Program Yüklendi.");
-    end
+    end else 
+        #500ns;
   end
   
  
